@@ -1,0 +1,18 @@
+1. Доробити класи для перевірки і взаємодії:
+        адреси
+        пошта
+        нотатки
+        теги
+
+2. Здійснювати пошук по даним
+
+3. Дописати відсутні функії зі списку: ['hello', 'show_all_commands', 'close/exit', 'add_contact', 'change_contact', 
+'phone', 'all_contacts', 'add_birthday', 'show_birthday', 'upcoming_birthdays', 'search_contacts', 'delete_contact', 
+'add_note', 'edit_note', 'delete_note', 'search_notes', 'all_notes', 'add_tag', 'remove_tag'] ~ 10 функцій відсутні
+
+
+Чи переписати def main() через match або через словник команд
+
+Чи сформувати всі дані, які виводяться в таблицю, чи просто виводити їх як текст
+
+Пропоную ділити завдання по класам і їх функціям
