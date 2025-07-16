@@ -65,6 +65,9 @@ def main():
             case "change":
                 message = func.change_contact(args, book)
 
+            case "delete_contact":
+                message = func.delete_contact(args, book)
+
             case "phone":
                 message = func.show_phone(args, book)
 
@@ -82,6 +85,15 @@ def main():
 
             case "show_all_commands" | "help":
                 message = get_command_table(func.commands)
+
+            case "add_tag":
+                message = func.add_tag(args, book)
+
+            case "remove_tag":
+                message = func.remove_tag(args, book)
+
+            case "search_by_tags":
+                message = func.search_by_tags(book)
 
             case _:
                 message = "Invalid command. Type `show_all_commands` or `help` to see available commands."

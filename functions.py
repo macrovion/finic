@@ -1,6 +1,10 @@
-from classes_init import AddressBook, Record
+from classes_init import AddressBook, Record, Tag
 import pickle
 
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
+# Обробка помилок через декоратор
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -52,6 +56,16 @@ def add_contact(args, book: AddressBook):
     return message
 
 @input_error
+def delete_contact(args, book: AddressBook):
+    name = args[0]
+    record = book.find(name)
+    if not record:
+        return "Contact not found."
+    book.delete(name)
+    return f"Contact '{name}' has been deleted."
+
+
+@input_error
 def change_contact(args, book: AddressBook):
     name, old_phone, new_phone = args
     record = book.find(name)
@@ -85,7 +99,7 @@ def add_birthday(args, book: AddressBook):
     record = book.find(name)
     if not record:
         return "Contact not found."
-    record.add_birthday(bday_str)
+    record.adding_birthday(bday_str)
     return f"Birthday added for {name}."
 
 @input_error
@@ -105,6 +119,58 @@ def birthdays(book: AddressBook):
     for item in upcoming:
         result.append(f"{item['name']} - {item['congratulation_date']}")
     return "\n".join(result)
+
+@input_error
+def add_tag(args, book: AddressBook):
+    name, tag_value = args
+    record = book.find(name)
+    if not record:
+        return "Contact not found."
+
+    tag = Tag(tag_value)
+    record.tags.add(tag.value)
+    return f"Tag '{tag.value}' added to {name}."
+
+
+@input_error
+def remove_tag(args, book: AddressBook):
+    name, tag_value = args
+    record = book.find(name)
+    if not record:
+        return "Contact not found."
+
+    if tag_value.lower() in record.tags:
+        record.tags.discard(tag_value.lower())
+        return f"Tag '{tag_value}' removed from {name}."
+    else:
+        return f"{name} does not have tag '{tag_value}'."
+
+@input_error
+def search_by_tags(book: AddressBook):
+    # Доповнення введення
+    all_tags = list(Tag.set_of_tags)
+    tag_completer = WordCompleter(all_tags, ignore_case=True)
+
+    user_input = prompt("Enter tags to search (separated by spaces): ", completer=tag_completer)
+    args = user_input.strip().split()
+    
+    # Пошук по тегам
+    search_tags = set(tag.lower() for tag in args)
+    if not search_tags:
+        return "Please provide at least one tag to search."
+
+    results = []
+    for record in book.data.values():
+        if search_tags.issubset(record.tags):
+            phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phones"
+            birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
+            tags = ", ".join(record.tags) if record.tags else "No tags"
+            results.append(f"{record.name.value}: Phones: {phones}; Birthday: {birthday}; Tags: {tags}")
+
+    if not results:
+        return "No contacts found with all of these tags."
+
+    return "\n".join(results)
 
 
 

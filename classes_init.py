@@ -27,11 +27,20 @@ class Birthday(Field):
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
 
+class Tag(Field):
+    set_of_tags = set()
+
+    def __init__(self, value):
+        self.__class__.set_of_tags.add(value.lower())
+        super().__init__(value.lower())
+
+
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
         self.birthday = None
+        self.tags = set ()
 
     def add_phone(self, number):
         self.phones.append(Phone(number))
@@ -57,8 +66,12 @@ class Record:
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
     
-    def add_birthday(self, value):
+    def adding_birthday(self, value):
         self.birthday = Birthday(value)
+
+    def adding_tags(self, value):
+        tag = str(Tag(value))
+        self.tags.add(tag)
 
 class AddressBook(UserDict):
     def __init__(self):
