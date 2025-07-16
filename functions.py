@@ -110,7 +110,6 @@ def birthdays(book: AddressBook):
 
 commands = {
     "hello": "Greet the user",
-    "show_all_commands": "Show all commands",
     "close/exit": "Exit the application",
     "add_contact": "Add a contact",
     "change_contact": "Modify a contact",

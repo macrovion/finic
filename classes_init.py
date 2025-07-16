@@ -74,7 +74,7 @@ class AddressBook(UserDict):
         if name in self.data:
             del self.data[name]
      
-    def get_upcoming_birthdays(self):
+    def get_upcoming_birthdays(self, days_towards):
         congratulation_date = []
         today = datetime.date.today()
         
@@ -88,7 +88,7 @@ class AddressBook(UserDict):
                 days_left = bday_this_year - today
                 weekday = bday_this_year.weekday()
 
-                if days_left < datetime.timedelta(days=7):
+                if days_left < datetime.timedelta(days_towards):
                     if weekday == 5:  # Якщо субота
                         bday_this_year += datetime.timedelta(days=2)
                     elif weekday == 6:  # Якщо неділя
@@ -97,3 +97,5 @@ class AddressBook(UserDict):
                     congratulation_date.append({"name": record.name.value, "congratulation_date": bday_this_year.strftime("%d.%m.%Y")})
 
         return congratulation_date
+
+
