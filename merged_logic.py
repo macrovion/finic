@@ -1,7 +1,4 @@
-# pip install prettytable
-# pip install prompt_toolkit
 
-from prettytable.colortable import ColorTable, Themes
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
@@ -9,34 +6,11 @@ import functions as func
 from classes_init import AddressBook
 
 
-# Побудова таблиці для виводу
-def format_output_table(title: str, content: str) -> str:
-    table = ColorTable(theme=Themes.DEFAULT)
-    table.field_names = [title]
-    table.align[title] = "l"
-    for line in content.strip().split("\n"):
-        table.add_row([line])
-    return str(table)
-
-# Вивід списку команд
-def get_command_table(commands_dict):
-    table = ColorTable(theme=Themes.HIGH_CONTRAST)
-    table.field_names = ["Command", "Description"]
-    table.align["Command"] = "l"
-    table.align["Description"] = "r"
-    table.add_rows(list(commands_dict.items()))
-    return str(table)
-
-def print_command_list(commands_dict):
-    print("List of available commands:")
-    command_table = get_command_table(commands_dict)
-    print(command_table)
-
 # Головна програма
 def main():
     book = AddressBook()
     print("Welcome to the assistant bot!")
-    print_command_list(func.commands)
+    func.print_command_list(func.commands)
 
     command_completer = WordCompleter(list(func.commands.keys()), ignore_case=True)
 
@@ -52,39 +26,49 @@ def main():
             case "close" | "exit":
                 func.save_data(book, args[0] if args else "addressbook.pkl")
                 message = "Good bye!"
-                print(format_output_table("Message", message))
-                break
 
             case "hello":
                 book = func.load_data(args[0] if args else "addressbook.pkl")
                 message = "How can I help you?"
 
-            case "add":
+            case "add_contact":
                 message = func.add_contact(args, book)
 
-            case "change":
+            case "change_contact":
                 message = func.change_contact(args, book)
 
             case "delete_contact":
                 message = func.delete_contact(args, book)
 
-            case "phone":
+            case "search_contacts":
+                message = func.search_contacts(args, book)
+
+            case "show_phone":
                 message = func.show_phone(args, book)
 
-            case "all":
+            case "all_contacts":
                 message = func.all_contacts(book)
 
-            case "add-birthday":
+            case "add_birthday":
                 message = func.add_birthday(args, book)
 
-            case "show-birthday":
+            case "show_birthday":
                 message = func.show_birthday(args, book)
 
             case "birthdays":
                 message = func.birthdays(book)
 
             case "show_all_commands" | "help":
-                message = get_command_table(func.commands)
+                message = func.get_command_table(func.commands)
+
+            case "add_address":
+                message = func.add_address(args, book)
+
+            case "remove_address":
+                message = func.remove_address(args, book)
+
+            case "change_address":
+                message = func.change_address(args, book)
 
             case "add_tag":
                 message = func.add_tag(args, book)
@@ -99,7 +83,7 @@ def main():
                 message = "Invalid command. Type `show_all_commands` or `help` to see available commands."
 
         # Виводимо результат в таблиці
-        print(format_output_table("Result", message))
+        print(func.format_output_table("Result", message))
 
 
 # Запуск тільки як скрипт

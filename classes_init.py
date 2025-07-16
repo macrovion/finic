@@ -27,6 +27,10 @@ class Birthday(Field):
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
 
+class Address(Field):
+    def __init__(self, value):
+        super().__init__(value)
+
 class Tag(Field):
     set_of_tags = set()
 
@@ -34,12 +38,12 @@ class Tag(Field):
         self.__class__.set_of_tags.add(value.lower())
         super().__init__(value.lower())
 
-
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
         self.birthday = None
+        self.address = None
         self.tags = set ()
 
     def add_phone(self, number):
@@ -68,6 +72,15 @@ class Record:
     
     def adding_birthday(self, value):
         self.birthday = Birthday(value)
+
+    def adding_address(self, address):
+        self.address.append(Address(address))
+
+    def removing_address(self):
+            self.address = None
+
+    def editing_address(self, new_address):
+            self.address = Address(new_address)
 
     def adding_tags(self, value):
         tag = str(Tag(value))
