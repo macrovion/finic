@@ -11,6 +11,8 @@ from address import add_address, remove_address, change_address
 from tag import add_tag, remove_tag, show_all_tags, search_by_tags
 from email_utils import add_email, remove_email, change_email
 
+from notebook import load_notebook, save_notebook
+
 commands = {
     "hello": "Greet the user",
     "close/exit": "Exit the application",
@@ -32,12 +34,20 @@ commands = {
     "show_all_tags": "Show all tags",
     "add_email": "Add an email",
     "remove_email": "Remove an email",
-    "change_email": "Changing an email"
+    "change_email": "Changing an email",
+
+    "note_add":       "Додати нотатку: note_add <текст>",
+    "note_find":      "Знайти за текстом: note_find <підрядок>",
+    "note_edit":      "Редагувати нотатку: note_edit <індекс> <новий_текст>",
+    "note_delete":    "Видалити нотатку: note_delete <індекс>",
+    "note_tag":       "Додати теги: note_tag <індекс> <тег1,тег2,...>",
+    "note_tagfind":   "Знайти за тегом: note_tagfind <тег>",
     }
 
 # Головна програма
 def main():
     book = AddressBook()
+    notes = load_notebook() 
     print("Welcome to the assistant bot!")
     print_command_list(commands)
 
@@ -116,6 +126,59 @@ def main():
             
             case "change_email":
                 message = change_email(args, book)
+
+            case "note_add":
+                text = " ".join(args)
+                notes.add_note(text)
+                save_notebook(notes)
+                message = "Нотатку додано."
+
+            case "note_find":
+                found = notes.search_text(" ".join(args))
+                if not found:
+                    message = "Нічого не знайдено."
+                else:
+                    message = "\n".join(
+                        f"{i}: {n.text} [{', '.join(n.tags)}]"
+                        for i, n in enumerate(found)
+                    )
+
+            case "note_edit":
+                idx = int(args[0])
+                new_text = " ".join(args[1:])
+                if notes.edit_note(idx, new_text):
+                    save_notebook(notes)
+                    message = "Нотатку оновлено."
+                else:
+                    message = "Невірний індекс."
+
+            case "note_delete":
+                idx = int(args[0])
+                if notes.delete_note(idx):
+                    save_notebook(notes)
+                    message = "Нотатку видалено."
+                else:
+                    message = "Невірний індекс."
+
+            case "note_tag":
+                idx = int(args[0])
+                tags = args[1].split(",")
+                if notes.add_tags(idx, tags):
+                    save_notebook(notes)
+                    message = "Теги додано."
+                else:
+                    message = "Невірний індекс."
+
+            case "note_tagfind":
+                tag = args[0]
+                found = notes.search_tag(tag)
+                if not found:
+                    message = "Нічого не знайдено."
+                else:
+                    message = "\n".join(
+                        f"{i}: {n.text} [{', '.join(n.tags)}]"
+                        for i, n in enumerate(found)
+                    )
 
             case _:
                 message = "Invalid command. Type `show_all_commands` or `help` to see available commands."
