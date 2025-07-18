@@ -1,4 +1,4 @@
-from main_classes import AddressBook
+
 import pickle
 from prettytable.colortable import ColorTable, Themes
 
@@ -35,6 +35,7 @@ def load_data(filename):
         with open(filename, "rb") as f:
             return pickle.load(f)
     except FileNotFoundError:
+        from main_classes import AddressBook
         return AddressBook()
 
 # Побудова таблиці для виводу

@@ -6,14 +6,14 @@ from phone import Phone
 from birthday import Birthday
 from address import Address
 from tag import Tag
-from email import Email
+from email_utils import Email
 
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
         self.birthday = None
-        self.address = None
+        self.address = []
         self.email = None
         self.tags = set ()
 

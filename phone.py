@@ -1,5 +1,4 @@
 from classes_init import Field
-from main_classes import AddressBook, Record
 from general_functions import input_error
 
 class Phone(Field):
@@ -13,7 +12,8 @@ class Phone(Field):
         
 # Робота з контактами/номерами телефону
 @input_error
-def add_contact(args, book: AddressBook):
+def add_contact(args, book):
+    from main_classes import Record
     if len(args) < 2:
         return "Please provide both name and value."
     name, phone = args
@@ -30,7 +30,7 @@ def add_contact(args, book: AddressBook):
     return message
 
 @input_error
-def delete_contact(args, book: AddressBook):
+def delete_contact(args, book):
     name = args[0]
     record = book.find(name)
     if not record:
@@ -40,7 +40,7 @@ def delete_contact(args, book: AddressBook):
 
 
 @input_error
-def change_contact(args, book: AddressBook):
+def change_contact(args, book):
     name, old_phone, new_phone = args
     record = book.find(name)
     if not record:
@@ -49,7 +49,7 @@ def change_contact(args, book: AddressBook):
     return "Phone changed."
 
 @input_error
-def show_phone(args, book: AddressBook):
+def show_phone(args, book):
     name = args[0]
     record = book.find(name)
     if not record or not record.phones:
@@ -57,7 +57,7 @@ def show_phone(args, book: AddressBook):
     return ", ".join(phone.value for phone in record.phones)
 
 @input_error
-def all_contacts(book: AddressBook):
+def all_contacts(book):
     if not book.data:
         return "Address book is empty."
     result = []
@@ -68,7 +68,7 @@ def all_contacts(book: AddressBook):
     return "\n".join(result)
 
 @input_error
-def search_contacts(args, book: AddressBook):
+def search_contacts(args, book):
     query = " ".join(args).lower()
     results = []
 

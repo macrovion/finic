@@ -1,4 +1,4 @@
-from main_classes import AddressBook
+
 from general_functions import input_error
 from classes_init import Field
 import re
@@ -15,7 +15,7 @@ class Email (Field):
         
 # Робота з поштою
 @input_error
-def add_email(args, book: AddressBook):
+def add_email(args, book):
     name, mail = args
     record = book.find(name)
     if not record:
@@ -24,7 +24,7 @@ def add_email(args, book: AddressBook):
     return f"Email added for {name}."
 
 @input_error
-def remove_email(args, book: AddressBook):
+def remove_email(args, book):
     name = args [0]
     record = book.find(name)
     if not record:
@@ -33,7 +33,7 @@ def remove_email(args, book: AddressBook):
     return f"Email removed for {name}."
 
 @input_error
-def change_email(args, book: AddressBook):
+def change_email(args, book):
     name, new_email = args
     record = book.find(name)
     if not record:

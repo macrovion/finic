@@ -1,4 +1,4 @@
-from main_classes import AddressBook
+
 from general_functions import input_error
 from classes_init import Field
 
@@ -10,7 +10,7 @@ class Address(Field):
 
 # Робота з адресами
 @input_error
-def add_address(args, book: AddressBook):
+def add_address(args, book):
     if len(args) < 2:
         return "Please provide both name and value."
     name, address = args
@@ -21,7 +21,7 @@ def add_address(args, book: AddressBook):
     return f"Address added for {name}."
 
 @input_error
-def remove_address(args, book: AddressBook):
+def remove_address(args, book):
     name = args [0]
     record = book.find(name)
     if not record:
@@ -30,7 +30,7 @@ def remove_address(args, book: AddressBook):
     return f"Address removed for {name}."
 
 @input_error
-def change_address(args, book: AddressBook):
+def change_address(args, book):
     name, new_address = args
     record = book.find(name)
     if not record:
