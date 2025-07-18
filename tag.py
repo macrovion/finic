@@ -1,5 +1,4 @@
 from classes_init import Field
-from main_classes import AddressBook
 from general_functions import input_error
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
@@ -14,7 +13,7 @@ class Tag(Field):
 
 # Робота з тегами
 @input_error
-def add_tag(args, book: AddressBook):
+def add_tag(args, book):
     if len(args) < 2:
         return "Please provide both name and value."
     name, tag_value = args
@@ -28,7 +27,7 @@ def add_tag(args, book: AddressBook):
 
 
 @input_error
-def remove_tag(args, book: AddressBook):
+def remove_tag(args, book):
     name, tag_value = args
     record = book.find(name)
     if not record:
@@ -45,7 +44,7 @@ def show_all_tags():
     return list(Tag.set_of_tags)
 
 @input_error
-def search_by_tags(book: AddressBook):
+def search_by_tags(book):
     # Доповнення введення
     all_tags = list(Tag.set_of_tags)
     tag_completer = WordCompleter(all_tags, ignore_case=True)

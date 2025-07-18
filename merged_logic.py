@@ -9,7 +9,7 @@ from phone import add_contact, delete_contact, change_contact, all_contacts, sea
 from birthday import add_birthday, show_birthday, birthdays
 from address import add_address, remove_address, change_address
 from tag import add_tag, remove_tag, show_all_tags, search_by_tags
-from email import add_email, remove_email, change_email
+from email_utils import add_email, remove_email, change_email
 
 commands = {
     "hello": "Greet the user",

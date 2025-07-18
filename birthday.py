@@ -1,6 +1,5 @@
 import datetime
 from classes_init import Field
-from main_classes import AddressBook
 from general_functions import input_error
 
 
@@ -14,7 +13,7 @@ class Birthday(Field):
 
 # Робота з днями народжень
 @input_error
-def add_birthday(args, book: AddressBook):
+def add_birthday(args, book):
     if len(args) < 2:
         return "Please provide both name and value."
     name, bday_str = args
@@ -25,7 +24,7 @@ def add_birthday(args, book: AddressBook):
     return f"Birthday added for {name}."
 
 @input_error
-def show_birthday(args, book: AddressBook):
+def show_birthday(args, book):
     name = args[0]
     record = book.find(name)
     if not record or not record.birthday:
@@ -33,7 +32,7 @@ def show_birthday(args, book: AddressBook):
     return record.birthday.value.strftime("%d.%m.%Y")
 
 @input_error
-def birthdays(book: AddressBook):
+def birthdays(book):
     upcoming = book.get_upcoming_birthdays()
     if not upcoming:
         return "No birthdays in the next week."
