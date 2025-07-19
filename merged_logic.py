@@ -36,12 +36,12 @@ commands = {
     "remove_email": "Remove an email",
     "change_email": "Changing an email",
 
-    "note_add":       "Додати нотатку: note_add <текст>",
-    "note_find":      "Знайти за текстом: note_find <підрядок>",
-    "note_edit":      "Редагувати нотатку: note_edit <індекс> <новий_текст>",
-    "note_delete":    "Видалити нотатку: note_delete <індекс>",
-    "note_tag":       "Додати теги: note_tag <індекс> <тег1,тег2,...>",
-    "note_tagfind":   "Знайти за тегом: note_tagfind <тег>",
+    "note_add":       "Add note: note_add <text>",
+    "note_find":      "Find by text: note_find <string>",
+    "note_edit":      "Edit a note: note_edit <index> <new_text>",
+    "note_delete":    "Delete note: note_delete <index>",
+    "note_tag":       "Add tags: note_tag <index> <tag1,tag2,...>",
+    "note_tagfind":   "Find by tag: note_tagfind <tag>"
     }
 
 # Головна програма
