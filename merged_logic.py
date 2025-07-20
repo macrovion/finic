@@ -35,7 +35,6 @@ commands = {
     "add_email": "Add an email",
     "remove_email": "Remove an email",
     "change_email": "Changing an email",
-
     "note_add":       "Add note: note_add <text>",
     "note_find":      "Find by text: note_find <string>",
     "note_edit":      "Edit a note: note_edit <index> <new_text>",
@@ -44,8 +43,13 @@ commands = {
     "note_tagfind":   "Find by tag: note_tagfind <tag>"
     }
 
-# Головна програма
 def main():
+    """
+    Main loop of the assistant bot.
+    Initializes AddressBook and Notebook, shows commands,
+    then continuously prompts user for input with autocomplete,
+    processes commands, and displays responses.
+    """
     book = AddressBook()
     notes = load_notebook() 
     print("Welcome to the assistant bot!")
