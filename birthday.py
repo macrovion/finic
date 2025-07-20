@@ -32,11 +32,19 @@ def show_birthday(args, book):
     return record.birthday.value.strftime("%d.%m.%Y")
 
 @input_error
-def birthdays(book):
-    upcoming = book.get_upcoming_birthdays()
+def birthdays(args, book: AddressBook):
+    # Перевірка, що передано саме один аргумент — ціле число
+    if len(args) != 1 or not args[0].isdigit():
+        return "❗ Вкажіть число днів. Приклад: birthdays 7"
+
+    days = int(args[0])
+    upcoming = book.get_upcoming_birthdays(days)
+
     if not upcoming:
-        return "No birthdays in the next week."
+        return "Немає іменин у найближчі дні."
+
+    # Формуємо рядок з іменинниками та датами
     result = []
     for item in upcoming:
-        result.append(f"{item['name']} - {item['congratulation_date']}")
+        result.append(f"{item['name']} — {item['congratulation_date']}")
     return "\n".join(result)

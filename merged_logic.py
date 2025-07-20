@@ -98,7 +98,7 @@ def main():
                 message = show_birthday(args, book)
 
             case "birthdays":
-                message = birthdays(book)
+                message = birthdays(args, book)
 
             case "add_address":
                 message = add_address(args, book)
