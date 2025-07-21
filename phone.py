@@ -1,5 +1,5 @@
 from classes_init import Field
-from general_functions import input_error
+from decorator import input_error
 
 class Phone(Field):
     """Represents a phone number with validation for 10-digit strings."""
@@ -9,7 +9,7 @@ class Phone(Field):
 
     def checking(self, number):
         """Validate that number is a string of exactly 10 digits."""
-        if type(number) != str or len(number) != 10:
+        if type(number) != str or len(number) != 10 or not number.isdigit():
             raise ValueError("Phone number must be a string of 10 digits.")
 
 
@@ -24,7 +24,6 @@ def add_contact(args, book):
     if len(args) < 2:
         return "Please provide both name and value."
     name, phone = args
-    print(f"[DEBUG] args: {args}")
     record = book.find(name)
     if not record:
         record = Record(name)
@@ -67,20 +66,6 @@ def show_phone(args, book):
     if not record or not record.phones:
         return "No phones found."
     return ", ".join(phone.value for phone in record.phones)
-
-
-@input_error
-def all_contacts(book):
-    """Return formatted string with all contacts, their phones and birthdays."""
-    if not book.data:
-        return "Address book is empty."
-    result = []
-    for record in book.data.values():
-        phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phones"
-        bday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
-        result.append(f"{record.name.value}: Phones: {phones}; Birthday: {bday}")
-    return "\n".join(result)
-
 
 @input_error
 def search_contacts(args, book):

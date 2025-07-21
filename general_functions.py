@@ -1,21 +1,6 @@
 import pickle
 from prettytable.colortable import ColorTable, Themes
-
-def input_error(func):
-    """Decorator that catches common errors and returns user-friendly messages."""
-    def inner(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except ValueError:
-            return "Give me name, phone or birthday, please."
-        except KeyError:
-            return "Contact not found."
-        except IndexError:
-            return "Not enough arguments."
-        except:
-            return "Something went wrong"
-    return inner
-
+from decorator import input_error
 
 @input_error
 def parse_input(user_input):
@@ -66,3 +51,31 @@ def print_command_list(commands_dict):
     print("List of available commands:")
     command_table = get_command_table(commands_dict)
     print(command_table)
+
+
+def all_contacts(book):
+    """Return formatted string with all contacts and all their fields."""
+    if not book.data:
+        return "Address book is empty."
+    lines = []
+    for record in book.data.values():
+        # Phones
+        phones = ", ".join(p.value for p in record.phones) if record.phones else "No phones"
+        # Birthday
+        bday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
+        # Address (always a list)
+        if record.address:
+            addr = ", ".join(a.value for a in record.address)
+        else:
+            addr = "No address"
+        # Email
+        email = record.email.value if record.email else "No email"
+
+        lines.append(
+            f"{record.name.value}: "
+            f"Phones: {phones}; "
+            f"Birthday: {bday}; "
+            f"Address: {addr}; "
+            f"Email: {email}"
+        )
+    return "\n".join(lines)

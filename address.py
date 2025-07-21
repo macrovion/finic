@@ -1,4 +1,4 @@
-from general_functions import input_error
+from decorator import input_error
 from classes_init import Field
 
 
@@ -7,14 +7,13 @@ class Address(Field):
     def __init__(self, value):
         super().__init__(value)
 
-
-# Address operations
 @input_error
 def add_address(args, book):
-    """Adds an address to a contact by name. Finds the contact and calls adding_address()."""
+    """Adds an address to a contact by name. Збирає всі слова після імені в одну строку."""
     if len(args) < 2:
-        return "Please provide both name and value."
-    name, address = args
+        return "Please provide both name and address."
+    name = args[0]
+    address = " ".join(args[1:])
     record = book.find(name)
     if not record:
         return "Contact not found."
@@ -24,7 +23,9 @@ def add_address(args, book):
 
 @input_error
 def remove_address(args, book):
-    """Removes the address from a contact. Finds the contact and calls removing_address()."""
+    """Removes the address from a contact."""
+    if len(args) < 1:
+        return "Please provide the contact name."
     name = args[0]
     record = book.find(name)
     if not record:
@@ -35,8 +36,11 @@ def remove_address(args, book):
 
 @input_error
 def change_address(args, book):
-    """Changes the address of a contact. Finds the contact and calls editing_address()."""
-    name, new_address = args
+    """Changes the address of a contact. Збирає всі слова після імені в одну строку."""
+    if len(args) < 2:
+        return "Please provide both name and new address."
+    name = args[0]
+    new_address = " ".join(args[1:])
     record = book.find(name)
     if not record:
         return "Contact not found."

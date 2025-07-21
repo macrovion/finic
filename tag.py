@@ -1,5 +1,5 @@
 from classes_init import Field
-from general_functions import input_error
+from decorator import input_error
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 

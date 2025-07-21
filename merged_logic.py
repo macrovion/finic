@@ -4,11 +4,11 @@ from prompt_toolkit.completion import WordCompleter
 from main_classes import AddressBook
 
 from general_functions import parse_input, save_data, load_data, format_output_table, \
-    get_command_table, print_command_list
-from phone import add_contact, delete_contact, change_contact, all_contacts, search_contacts, show_phone
+    get_command_table, print_command_list, all_contacts
+from phone import add_contact, delete_contact, change_contact, search_contacts, show_phone
 from birthday import add_birthday, show_birthday, birthdays
 from address import add_address, remove_address, change_address
-from tag import add_tag, remove_tag, show_all_tags, search_by_tags
+from tag import add_tag, remove_tag, search_by_tags
 from email_utils import add_email, remove_email, change_email
 
 from notebook import load_notebook, save_notebook
@@ -21,8 +21,7 @@ commands = {
     "show_phone": "Show the contact's phone number",
     "all_contacts": "Show all contacts",
     "add_birthday": "Add a birthday to a contact",
-    "birthdays": "Show a contact's birthday",
-    "upcoming_birthdays": "Show upcoming birthdays",
+    "birthdays": "Show a contact's upcoming birthday",
     "search_contacts": "Search for a contact",
     "delete_contact": "Delete a contact",
     "add_address": "Add address to contact",
