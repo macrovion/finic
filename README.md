@@ -14,8 +14,6 @@ A command-line personal assistant for managing contacts and notes, featuring bir
 - Tag notes and search by tags  
 - Command-line interface with autocomplete and error handling  
 
----
-
 ### Installation
 
 #### 1. Clone the repository
@@ -44,18 +42,12 @@ python3 -m venv venv
 pip install -r requirements.txt
 ```
 
-> Make sure the `requirements.txt` includes all needed packages, e.g. `prompt_toolkit`, `prettytable`, etc.
-
----
-
 ### Usage
 Run the assistant bot:
 ```bash
 python main.py
 ```
-Use the command autocomplete and follow prompts to manage your contacts and notes.
 
----
 
 ### Extensibility
 - Modular architecture allows easy feature addition (e.g., voice commands, additional contact fields)  
@@ -69,7 +61,11 @@ Use the command autocomplete and follow prompts to manage your contacts and note
 - Update pip if you encounter installation issues:
 ```bash
 python -m pip install --upgrade pip
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> f8c949c (minor improvements)
 # Personal Assistant Application
 
 ## Overview
@@ -92,4 +88,7 @@ A command-line personal assistant for managing contacts and notes, with features
 
 ## Extensibility
 - Modular design for easy addition of new features (e.g., voice control, more fields)
+<<<<<<< HEAD
 main
+=======
+>>>>>>> f8c949c (minor improvements)

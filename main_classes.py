@@ -60,7 +60,7 @@ class Record:
 
     def removing_address(self):
         """Remove all addresses from contact."""
-        self.address = None
+        self.address = []
 
     def editing_address(self, new_address):
         """Replace all addresses with a new single address."""

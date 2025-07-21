@@ -68,20 +68,6 @@ def show_phone(args, book):
         return "No phones found."
     return ", ".join(phone.value for phone in record.phones)
 
-
-@input_error
-def all_contacts(book):
-    """Return formatted string with all contacts, their phones and birthdays."""
-    if not book.data:
-        return "Address book is empty."
-    result = []
-    for record in book.data.values():
-        phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phones"
-        bday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
-        result.append(f"{record.name.value}: Phones: {phones}; Birthday: {bday}")
-    return "\n".join(result)
-
-
 @input_error
 def search_contacts(args, book):
     """Search contacts by name containing the query string (case-insensitive)."""
