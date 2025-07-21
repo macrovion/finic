@@ -1,6 +1,5 @@
 # finic  
 finic_project_by_NPT
-main
 
 ## Personal Assistant Application
 
@@ -61,11 +60,7 @@ python main.py
 - Update pip if you encounter installation issues:
 ```bash
 python -m pip install --upgrade pip
-<<<<<<< HEAD
-=======
-=======
 
->>>>>>> f8c949c (minor improvements)
 # Personal Assistant Application
 
 ## Overview
@@ -88,7 +83,3 @@ A command-line personal assistant for managing contacts and notes, with features
 
 ## Extensibility
 - Modular design for easy addition of new features (e.g., voice control, more fields)
-<<<<<<< HEAD
-main
-=======
->>>>>>> f8c949c (minor improvements)
