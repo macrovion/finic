@@ -1,4 +1,4 @@
-from general_functions import input_error
+from decorator import input_error
 from classes_init import Field
 import re
 

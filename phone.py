@@ -1,5 +1,5 @@
 from classes_init import Field
-from general_functions import input_error
+from decorator import input_error
 
 class Phone(Field):
     """Represents a phone number with validation for 10-digit strings."""

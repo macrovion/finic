@@ -1,6 +1,6 @@
 import datetime
 from classes_init import Field
-from general_functions import input_error
+from decorator import input_error
 
 
 class Birthday(Field):
