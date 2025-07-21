@@ -9,7 +9,7 @@ class Phone(Field):
 
     def checking(self, number):
         """Validate that number is a string of exactly 10 digits."""
-        if type(number) != str or len(number) != 10:
+        if type(number) != str or len(number) != 10 or not number.isdigit():
             raise ValueError("Phone number must be a string of 10 digits.")
 
 
@@ -24,7 +24,6 @@ def add_contact(args, book):
     if len(args) < 2:
         return "Please provide both name and value."
     name, phone = args
-    print(f"[DEBUG] args: {args}")
     record = book.find(name)
     if not record:
         record = Record(name)
